@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.moviesapi.model.dto.response.TagResponseDTO;
 
 @Builder
 @Entity
@@ -25,4 +26,11 @@ public class Tag {
     @JoinColumn(nullable = false)
     private User user;
 
+    public TagResponseDTO toDto() {
+        return new TagResponseDTO(
+                this.id,
+                this.name,
+                this.user.toDto()
+        );
+    }
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.moviesapi.model.dto.response.MovieResponseDTO;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -35,4 +36,13 @@ public class Movie {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
+    public MovieResponseDTO toDto() {
+        return new MovieResponseDTO(
+                this.id,
+                this.name,
+                this.duration,
+                this.rate,
+                this.user.toDto()
+        );
+    }
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.moviesapi.model.dto.response.UserResponseDTO;
 import net.weg.moviesapi.model.enums.ThemePreferenceEnum;
 
 import java.time.LocalDateTime;
@@ -41,4 +42,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Tag> movieTagList;
 
+    public UserResponseDTO toDto() {
+        return new UserResponseDTO(
+                this.id,
+                this.name,
+                this.document,
+                this.created_at,
+                this.theme
+        );
+    }
 }

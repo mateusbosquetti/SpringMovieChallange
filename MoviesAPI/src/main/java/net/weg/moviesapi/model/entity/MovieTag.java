@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.moviesapi.model.dto.response.MovieTagResponseDTO;
 
 import java.util.UUID;
 
@@ -29,5 +30,11 @@ public class MovieTag {
     private Tag tag;
 
 
-
+    public MovieTagResponseDTO toDto() {
+        return new MovieTagResponseDTO(
+                id,
+                movie.toDto(),
+                tag.toDto()
+        );
+    }
 }
