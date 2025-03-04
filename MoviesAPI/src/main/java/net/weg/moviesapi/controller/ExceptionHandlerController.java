@@ -15,7 +15,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(exception = {Exception.class})
     public ResponseEntity<ExceptionResponseDTO> exceptionHandler(Exception e) {
-        ExceptionResponseDTO exceptionResponseDTO = new ExceptionResponseDTO("Mateus Bosquetti", e.getMessage(), e.getClass(), LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+        ExceptionResponseDTO exceptionResponseDTO = new ExceptionResponseDTO("Mateus Henrique Bosquetti", e.getMessage(), e.getClass(), LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         return new ResponseEntity<>(exceptionResponseDTO, HttpStatus.BAD_REQUEST);
     }
 
