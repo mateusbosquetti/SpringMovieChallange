@@ -1,7 +1,7 @@
 package net.weg.moviesapi.exception;
 
 public class UserNotFoundException extends RuntimeException{
-
+    //
     public UserNotFoundException() {
         super();
     }
