@@ -2,6 +2,7 @@ package net.weg.moviesapi.interfaces;
 
 import net.weg.moviesapi.model.dto.request.MovieTagRequestDTO;
 import net.weg.moviesapi.model.dto.response.MovieTagResponseDTO;
+import net.weg.moviesapi.model.entity.Movie;
 import net.weg.moviesapi.model.entity.MovieTag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,4 +15,6 @@ public interface MovieTagInterface {
     public Page<MovieTagResponseDTO> getMovieTag (Pageable pageable);
     public MovieTagResponseDTO findMovieTag (Integer id);
     public MovieTag findMovieTagEntity (Integer id);
+    public MovieTag persisteChanges(MovieTag movieTag);
+
 }

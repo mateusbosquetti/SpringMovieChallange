@@ -15,5 +15,7 @@ public interface TagInterface {
     public Page<TagResponseDTO> getTag (Pageable pageable);
     public TagResponseDTO findTag (Integer id);
     public Tag findTagEntity (Integer id);
+    public Tag persisteChanges (Tag tag);
+
 
 }

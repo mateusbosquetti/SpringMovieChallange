@@ -18,7 +18,8 @@ public interface MovieInterface {
 
     public Page<MovieResponseDTO> getMovie(Pageable pageable);
 
-    public MovieResponseDTO findMovie(Integer id);
+    public MovieResponseDTO findMovie(String name);
 
-    public Movie findMovieEntity(Integer id);
+    public Movie findMovieEntity(String name);
+    public Movie persisteChanges(Movie movie);
 }

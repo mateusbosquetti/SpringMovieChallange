@@ -8,10 +8,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserInterface {
-    public UserResponseDTO createUser (UserRequestDTO userRequestDTO);
-    public UserResponseDTO putUser (UserRequestDTO userRequestDTO, Integer id);
-    public UserResponseDTO deleteUser (Integer id);
-    public Page<UserResponseDTO> getUser (Pageable pageable);
-    public UserResponseDTO findUser (Integer id);
-    public User findUserEntity (Integer id);
+    public UserResponseDTO createUser(UserRequestDTO userRequestDTO);
+
+    public UserResponseDTO putUser(UserRequestDTO userRequestDTO, Integer id);
+
+    public UserResponseDTO deleteUser(Integer id);
+
+    public Page<UserResponseDTO> getUser(Pageable pageable);
+
+    public UserResponseDTO findUser(Integer id);
+
+    public User findUserEntity(Integer id);
+
+    public User persisteChanges(User user);
 }
