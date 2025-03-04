@@ -9,11 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TagRepository extends JpaRepository<Tag, Integer> {
 
-    public TagResponseDTO createTag (TagRequestDTO tagRequestDTO);
-    public TagResponseDTO putTag (TagRequestDTO tagRequestDTO, Integer id);
-    public TagResponseDTO deleteTag (Integer id);
-    public Page<TagResponseDTO> getTag (Pageable pageable);
-    public TagResponseDTO findTag (Integer id);
-    public Tag findTagEntity (Integer id);
+
 
 }
