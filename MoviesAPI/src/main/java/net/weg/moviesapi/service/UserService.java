@@ -18,31 +18,45 @@ public class UserService implements UserInterface {
 
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
-        return null;
+        User user = userRequestDTO.toEntity();
+        user = persisteChanges(user);
+        return user.toDto();
     }
 
     @Override
     public UserResponseDTO putUser(UserRequestDTO userRequestDTO, Integer id) {
-        return null;
+        findUserEntity(id);
+
+        User user = userRequestDTO.toEntity();
+        user.setId(id);
+        user = persisteChanges(user);
+        return user.toDto();
     }
 
     @Override
     public UserResponseDTO deleteUser(Integer id) {
-        return null;
+        User user = findUserEntity(id);
+        repository.deleteById(id);
+        return user.toDto();
     }
 
     @Override
     public Page<UserResponseDTO> getUser(Pageable pageable) {
-        return null;
+        return repository.findAll(pageable).map(User::toDto);
     }
 
     @Override
     public UserResponseDTO findUser(Integer id) {
-        return null;
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário DTO não encontrado!")).toDto();
     }
 
     @Override
     public User findUserEntity(Integer id) {
-        return null;
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário Entidade não encontrado!"));
+    }
+
+    @Override
+    public User persisteChanges(User user) {
+        return repository.save(user);
     }
 }
