@@ -11,7 +11,6 @@ public record MovieResponseDTO(
         String name,
         LocalTime duration,
         Integer rate,
-        List<Tag> tagList,
         UserResponseDTO user
 ) {
 }
