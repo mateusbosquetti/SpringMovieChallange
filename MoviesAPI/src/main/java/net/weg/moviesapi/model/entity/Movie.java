@@ -31,9 +31,6 @@ public class Movie {
     @Column(nullable = false)
     private Integer rate;
 
-    @OneToMany(mappedBy = "movie")
-    private List<MovieTag> movieTagList;
-
     @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
     private User user;

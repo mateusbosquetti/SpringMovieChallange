@@ -6,27 +6,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Builder
 @Entity
-@Table(name = "movie_tag")
+@Table(name = "tag")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovieTag {
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id", nullable = false)
-    private Movie movie;
+    @Column(nullable = false, unique = true)
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "tag_id", nullable = false)
-    private Tag tag;
-
+    @JoinColumn(nullable = false)
+    private User user;
 
 }

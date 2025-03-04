@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -39,6 +39,6 @@ public class User {
     private List<Movie> movieList;
 
     @OneToMany(mappedBy = "user")
-    private List<MovieTag> movieTagList;
+    private List<Tag> movieTagList;
 
 }
