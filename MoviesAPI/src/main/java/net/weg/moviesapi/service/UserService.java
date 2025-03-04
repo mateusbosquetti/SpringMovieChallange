@@ -1,6 +1,7 @@
 package net.weg.moviesapi.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.moviesapi.exception.UserNotFoundException;
 import net.weg.moviesapi.interfaces.UserInterface;
 import net.weg.moviesapi.model.dto.request.UserRequestDTO;
 import net.weg.moviesapi.model.dto.response.UserResponseDTO;
@@ -47,12 +48,12 @@ public class UserService implements UserInterface {
 
     @Override
     public UserResponseDTO findUser(Integer id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário DTO não encontrado!")).toDto();
+        return repository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário DTO não encontrado!")).toDto();
     }
 
     @Override
     public User findUserEntity(Integer id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário Entidade não encontrado!"));
+        return repository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário Entidade não encontrado!"));
     }
 
     @Override
