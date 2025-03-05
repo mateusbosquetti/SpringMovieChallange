@@ -1,6 +1,7 @@
 package net.weg.moviesapi.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.moviesapi.exception.TagNotFoundException;
 import net.weg.moviesapi.interfaces.TagInterface;
 import net.weg.moviesapi.model.dto.request.TagRequestDTO;
 import net.weg.moviesapi.model.dto.request.TagRequestDTO;
@@ -50,12 +51,12 @@ public class TagService implements TagInterface {
 
     @Override
     public TagResponseDTO findTag(Integer id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Tag DTO não encontrado!")).toDto();
+        return repository.findById(id).orElseThrow(() -> new TagNotFoundException("Tag DTO não encontrado!")).toDto();
     }
 
     @Override
     public Tag findTagEntity(Integer id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Tag Entidade não encontrado!"));
+        return repository.findById(id).orElseThrow(() -> new TagNotFoundException("Tag Entidade não encontrado!"));
     }
 
     @Override

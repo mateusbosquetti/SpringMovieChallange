@@ -1,6 +1,7 @@
 package net.weg.moviesapi.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.moviesapi.exception.MovieNotFoundException;
 import net.weg.moviesapi.interfaces.MovieInterface;
 import net.weg.moviesapi.model.dto.request.MovieRequestDTO;
 import net.weg.moviesapi.model.dto.request.MovieRequestDTO;
@@ -59,12 +60,12 @@ public class MovieService implements MovieInterface {
 
     @Override
     public MovieResponseDTO findMovie(UUID uuid) {
-        return repository.findById(uuid).orElseThrow(() -> new RuntimeException("Usuário DTO não encontrado!")).toDto();
+        return repository.findById(uuid).orElseThrow(() -> new MovieNotFoundException("Usuário DTO não encontrado!")).toDto();
     }
 
     @Override
     public Movie findMovieEntity(UUID uuid) {
-        return repository.findById(uuid).orElseThrow(() -> new RuntimeException("Usuário Entidade não encontrado!"));
+        return repository.findById(uuid).orElseThrow(() -> new MovieNotFoundException("Usuário Entidade não encontrado!"));
     }
 
     @Override
