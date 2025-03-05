@@ -26,10 +26,11 @@ public class UserService implements UserInterface {
 
     @Override
     public UserResponseDTO putUser(UserRequestDTO userRequestDTO, Integer id) {
-        findUserEntity(id);
+        User oldUser = findUserEntity(id);
 
         User user = userRequestDTO.toEntity();
         user.setId(id);
+        user.setCreated_at(oldUser.getCreated_at());
         user = persisteChanges(user);
         return user.toDto();
     }
