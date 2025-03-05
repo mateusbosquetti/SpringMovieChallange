@@ -4,14 +4,21 @@ import lombok.AllArgsConstructor;
 import net.weg.moviesapi.interfaces.MovieInterface;
 import net.weg.moviesapi.model.dto.request.MovieRequestDTO;
 import net.weg.moviesapi.model.dto.request.MovieRequestDTO;
+import net.weg.moviesapi.model.dto.request.MovieRequestDTO;
+import net.weg.moviesapi.model.dto.response.MovieResponseDTO;
 import net.weg.moviesapi.model.dto.response.MovieResponseDTO;
 import net.weg.moviesapi.model.dto.response.MovieResponseDTO;
 import net.weg.moviesapi.model.entity.Movie;
 import net.weg.moviesapi.model.entity.Movie;
+import net.weg.moviesapi.model.entity.Movie;
+import net.weg.moviesapi.model.entity.User;
+import net.weg.moviesapi.repository.MovieRepository;
 import net.weg.moviesapi.repository.MovieRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -29,19 +36,19 @@ public class MovieService implements MovieInterface {
     }
 
     @Override
-    public MovieResponseDTO putMovie(MovieRequestDTO movieRequestDTO, String name) {
-        Movie oldMovie = findMovieEntity(name);
+    public MovieResponseDTO putMovie(MovieRequestDTO movieRequestDTO, UUID uuid) {
+        Movie oldMovie = findMovieEntity(uuid);
 
         Movie movie = movieRequestDTO.toEntity(userService);
-        movie.setId(oldMovie.getId());
+        movie.setId(uuid);
         movie = persisteChanges(movie);
         return movie.toDto();
     }
 
     @Override
-    public MovieResponseDTO deleteMovie(String name) {
-        Movie movie = findMovieEntity(name);
-        repository.deleteById(movie.getId());
+    public MovieResponseDTO deleteMovie(UUID uuid) {
+        Movie movie = findMovieEntity(uuid);
+        repository.deleteById(uuid);
         return movie.toDto();
     }
 
@@ -51,13 +58,13 @@ public class MovieService implements MovieInterface {
     }
 
     @Override
-    public MovieResponseDTO findMovie(String name) {
-        return repository.findByName(name).orElseThrow(() -> new RuntimeException("Movie DTO não encontrado!")).toDto();
+    public MovieResponseDTO findMovie(UUID uuid) {
+        return repository.findById(uuid).orElseThrow(() -> new RuntimeException("Usuário DTO não encontrado!")).toDto();
     }
 
     @Override
-    public Movie findMovieEntity(String name) {
-        return repository.findByName(name).orElseThrow(() -> new RuntimeException("Movie Entidade não encontrado!"));
+    public Movie findMovieEntity(UUID uuid) {
+        return repository.findById(uuid).orElseThrow(() -> new RuntimeException("Usuário Entidade não encontrado!"));
     }
 
     @Override

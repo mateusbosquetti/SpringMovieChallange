@@ -10,13 +10,15 @@ import net.weg.moviesapi.model.entity.User;
 import net.weg.moviesapi.service.MovieService;
 import net.weg.moviesapi.service.TagService;
 
+import java.util.UUID;
+
 public record MovieTagRequestDTO(
-        @NotBlank String movie_name,
+        @NotNull UUID movie_id,
         @NotNull Integer tag_id
 ) {
     public MovieTag toEntity(MovieService movieService, TagService tagService) {
         return MovieTag.builder()
-                .movie(movieService.findMovieEntity(this.movie_name))
+                .movie(movieService.findMovieEntity(this.movie_id))
                 .tag(tagService.findTagEntity(this.tag_id))
                 .build();
     }

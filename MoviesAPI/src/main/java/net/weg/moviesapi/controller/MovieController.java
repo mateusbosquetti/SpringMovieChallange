@@ -9,7 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/movie")
@@ -19,23 +22,23 @@ public class MovieController {
     private MovieService service;
 
     @PostMapping
-    public ResponseEntity<MovieResponseDTO> postMovie(@RequestBody MovieRequestDTO movieRequestDTO) {
+    public ResponseEntity<MovieResponseDTO> postMovie(@RequestBody @Validated MovieRequestDTO movieRequestDTO) {
         return new ResponseEntity<>(service.createMovie(movieRequestDTO), HttpStatus.OK);
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<MovieResponseDTO> putMovie(@RequestBody MovieRequestDTO movieRequestDTO, @PathVariable(name = "name") String movie_name) {
-        return new ResponseEntity<>(service.putMovie(movieRequestDTO, movie_name), HttpStatus.OK);
+    @PutMapping("/{uuid}")
+    public ResponseEntity<MovieResponseDTO> putMovie(@RequestBody @Validated MovieRequestDTO movieRequestDTO, @PathVariable(name = "uuid") UUID movie_uuid) {
+        return new ResponseEntity<>(service.putMovie(movieRequestDTO, movie_uuid), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<MovieResponseDTO> deleteMovie(@PathVariable(name = "name") String movie_name) {
-        return new ResponseEntity<>(service.deleteMovie(movie_name), HttpStatus.OK);
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<MovieResponseDTO> deleteMovie(@PathVariable(name = "uuid") UUID movie_uuid) {
+        return new ResponseEntity<>(service.deleteMovie(movie_uuid), HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<MovieResponseDTO> findMovie(@PathVariable(name = "name") String movie_name) {
-        return new ResponseEntity<>(service.findMovie(movie_name), HttpStatus.OK);
+    @GetMapping("/{uuid}")
+    public ResponseEntity<MovieResponseDTO> findMovie(@PathVariable(name = "uuid") UUID movie_uuid) {
+        return new ResponseEntity<>(service.findMovie(movie_uuid), HttpStatus.OK);
     }
 
     @GetMapping

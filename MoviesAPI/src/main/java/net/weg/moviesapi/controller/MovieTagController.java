@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,12 +19,12 @@ public class MovieTagController {
     private MovieTagService service;
 
     @PostMapping
-    public ResponseEntity<MovieTagResponseDTO> postMovieTag (@RequestBody MovieTagRequestDTO movieTagRequestDTO) {
+    public ResponseEntity<MovieTagResponseDTO> postMovieTag (@RequestBody @Validated MovieTagRequestDTO movieTagRequestDTO) {
         return new ResponseEntity<>(service.createMovieTag(movieTagRequestDTO), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MovieTagResponseDTO> putMovieTag (@RequestBody MovieTagRequestDTO movieTagRequestDTO, @PathVariable(name = "id") Integer movieTag_id) {
+    public ResponseEntity<MovieTagResponseDTO> putMovieTag (@RequestBody @Validated MovieTagRequestDTO movieTagRequestDTO, @PathVariable(name = "id") Integer movieTag_id) {
         return new ResponseEntity<>(service.putMovieTag(movieTagRequestDTO, movieTag_id), HttpStatus.OK);
     }
 
