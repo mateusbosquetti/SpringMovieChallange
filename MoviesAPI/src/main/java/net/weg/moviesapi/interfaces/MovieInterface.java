@@ -12,14 +12,14 @@ import java.util.UUID;
 public interface MovieInterface {
     public MovieResponseDTO createMovie(MovieRequestDTO movieMovieRequestDTO);
 
-    public MovieResponseDTO putMovie(MovieRequestDTO movieMovieRequestDTO, String name);
+    public MovieResponseDTO putMovie(MovieRequestDTO movieMovieRequestDTO, UUID uuid);
 
-    public MovieResponseDTO deleteMovie(String name);
+    public MovieResponseDTO deleteMovie(UUID uuid);
 
     public Page<MovieResponseDTO> getMovie(Pageable pageable);
 
-    public MovieResponseDTO findMovie(String name);
+    public MovieResponseDTO findMovie(UUID uuid);
 
-    public Movie findMovieEntity(String name);
+    public Movie findMovieEntity(UUID uuid);
     public Movie persisteChanges(Movie movie);
 }
