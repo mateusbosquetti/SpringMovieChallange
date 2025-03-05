@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,12 +20,12 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> postUser (@RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> postUser (@RequestBody @Validated UserRequestDTO userRequestDTO) {
         return new ResponseEntity<>(service.createUser(userRequestDTO), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> putUser (@RequestBody UserRequestDTO userRequestDTO, @PathVariable(name = "id") Integer user_id) {
+    public ResponseEntity<UserResponseDTO> putUser (@RequestBody @Validated UserRequestDTO userRequestDTO, @PathVariable(name = "id") Integer user_id) {
         return new ResponseEntity<>(service.putUser(userRequestDTO, user_id), HttpStatus.OK);
     }
 

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,12 +19,12 @@ public class TagController {
     private TagService service;
 
     @PostMapping
-    public ResponseEntity<TagResponseDTO> postTag (@RequestBody TagRequestDTO tagRequestDTO) {
+    public ResponseEntity<TagResponseDTO> postTag (@RequestBody @Validated TagRequestDTO tagRequestDTO) {
         return new ResponseEntity<>(service.createTag(tagRequestDTO), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TagResponseDTO> putTag (@RequestBody TagRequestDTO tagRequestDTO, @PathVariable(name = "id") Integer tag_id) {
+    public ResponseEntity<TagResponseDTO> putTag (@RequestBody @Validated TagRequestDTO tagRequestDTO, @PathVariable(name = "id") Integer tag_id) {
         return new ResponseEntity<>(service.putTag(tagRequestDTO, tag_id), HttpStatus.OK);
     }
 
